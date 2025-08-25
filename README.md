@@ -48,7 +48,7 @@ this is a MVP. i tried to make a working demo as fast as i could.
 
 ```bash
 # Clone repo
-git clone https://github.com/yourusername/medai-ocr.git
+git clone https://github.com/Hamidspirit/medai-ocr.git
 cd medai-ocr
 
 # Create virtual environment
