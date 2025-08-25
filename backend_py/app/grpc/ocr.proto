@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package ocr;
+
+// The OCR service handles text extraction (and later AI processing).
+service OCRService {
+  // Extracts raw text from an uploaded file (image or PDF).
+  rpc ExtractText (OCRRequest) returns (OCRResponse);
+
+  // (Optional for later) After extracting, send text to an LLM for further processing.
+  rpc AnalyzeText (AnalyzeRequest) returns (AnalyzeResponse);
+}
+
+// Request to OCR service
+message OCRRequest {
+  bytes file_bytes = 1; // Raw file data
+  string file_type = 2; // "pdf" or "image"
+}
+
+// Response containing extracted text
+message OCRResponse {
+  string text = 1;
+}
+
+// Request to LLM service
+message AnalyzeRequest {
+  string text = 1;       // Extracted text to analyze
+  string query = 2;      // Optional: e.g. "Summarize diagnosis" or "Extract medications"
+}
+
+// Response from LLM/AI
+message AnalyzeResponse {
+  string answer = 1;     // AI-generated result
+  string raw_text = 2;   // (Optional) Keep original text for reference
+}
